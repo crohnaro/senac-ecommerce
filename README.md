@@ -8,8 +8,6 @@ Este projeto é uma simulação de uma plataforma de e-commerce desenvolvida pel
 
 O projeto será dividido em diferentes funcionalidades, atribuídas a grupos de estudantes (duplas ou um trio). Cada grupo será responsável por desenvolver uma parte específica da interface front-end. Após completar a interface, avançaremos para as outras camadas da aplicação.
 
-LINK DE EXEMPLO: https://bazaar.ui-lib.com/market-2
-
 
 ## Funcionalidades Atribuídas
 
