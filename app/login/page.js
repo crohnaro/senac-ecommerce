@@ -5,6 +5,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import Image from 'next/image';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -32,12 +33,11 @@ export default function LoginForm() {
       setPasswordError('');
     }
 
-    // Check if both fields are filled, and if not display the general login error
     if (email && password) {
       if (email !== 'valid@example.com' || password !== 'correctpassword') {
         setLoginError('Usuário ou senha incorretos');
       } else {
-        setLoginError(''); // Successful login logic here
+        setLoginError('');
       }
     }
   };
@@ -49,7 +49,7 @@ export default function LoginForm() {
         justifyContent: 'center',
         alignItems: 'center',
         height: '100vh',
-        backgroundColor: '#f0f0f5',
+        backgroundColor: '#f8f9fb',
       }}
     >
       <Box
@@ -57,20 +57,19 @@ export default function LoginForm() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          width: { xs: '90%', sm: '400px' },
-          padding: '40px',
+          width: { xs: '90%', sm: '480px' },
+          padding: '50px',
           backgroundColor: '#fff',
           borderRadius: '10px',
-          boxShadow: '0px 2px 15px rgba(0, 0, 0, 0.1)',
+          boxShadow: '0px 4px 20px rgba(0, 0, 0, 0.1)',
           textAlign: 'center',
         }}
       >
-        {/* Espaço para o logo */}
         <Box mb={3}>
-          <img src="/icons/bazaar-logo.png" alt="Bazaar Logo" style={{ width: 100, height: 100 }} />
+          <Image src="/bazar.png" alt="Bazaar Logo"  width={120} height={100}  />
         </Box>
 
-        <Typography variant="h4" sx={{ fontFamily: 'Poppins, sans-serif', fontSize: '24px', mb: 2 }}>
+        <Typography variant="h4" sx={{ fontFamily: 'Poppins, sans-serif', fontSize: '24px', mb: 2, color: '#2f3349' }}>
           Bem-vindo ao Bazaar
         </Typography>
 
@@ -93,7 +92,7 @@ export default function LoginForm() {
             id="password"
             fullWidth
             label="Senha"
-            placeholder="Digite sua senha"
+            placeholder="**********"
             type={showPassword ? 'text' : 'password'}
             variant="outlined"
             margin="normal"
@@ -105,18 +104,24 @@ export default function LoginForm() {
           />
           <Button
             onClick={togglePasswordVisibility}
-            sx={{ position: 'absolute', right: 10, top: 15 }}
+            sx={{ position: 'absolute', right: 2, top: 28 }}
           >
             {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
           </Button>
         </Box>
 
-        {/* Login button */}
         <Button
           fullWidth
           variant="contained"
-          color="error"
-          sx={{ marginTop: 2, fontFamily: 'Poppins, sans-serif' }}
+          sx={{
+            marginTop: 2,
+            backgroundColor: '#ff4b5c',
+            color: '#fff',
+            fontFamily: 'Poppins, sans-serif',
+            '&:hover': {
+              backgroundColor: '#ff4b5c',
+            },
+          }}
           onClick={handleLogin}
         >
           Entrar
@@ -128,75 +133,79 @@ export default function LoginForm() {
           </Typography>
         )}
 
-        {/* "Esqueceu a senha?" and "Criar conta" links */}
         <Box
           sx={{
             display: 'flex',
-            justifyContent: 'space-between',
+            flexDirection: 'column',
             width: '100%',
             marginTop: '10px',
+            alignItems: 'center',
           }}
         >
-          <Link href="#" underline="hover" sx={{ fontFamily: 'Poppins, sans-serif', fontSize: '14px' }}>
-            Esqueceu a senha?
-          </Link>
-          <Link href="#" underline="hover" sx={{ fontFamily: 'Poppins, sans-serif', fontSize: '14px' }}>
-            Criar conta
-          </Link>
-        </Box>
-
-        <Box sx={{ width: '100%', textAlign: 'center', mt: 2 }}>
-          <Typography variant="body1" sx={{ fontFamily: 'Poppins, sans-serif', color: '#777' }}>
+          <Typography variant="body1" sx={{ fontFamily: 'Poppins, sans-serif', color: '#777', mt: 2 }}>
             ou
           </Typography>
         </Box>
 
-        {/* Botão de continuar com Google */}
         <Button
           fullWidth
-          variant="outlined"
+          variant="contained"
           sx={{
             marginBottom: 1,
-            borderColor: '#e0e0e0',
-            color: '#333',
+            backgroundColor: '#4285F4', //azul
+            color: '#fff',
             padding: '10px',
             fontSize: '14px',
             textTransform: 'none',
             fontFamily: 'Poppins, sans-serif',
             borderRadius: '8px',
             '&:hover': {
-              borderColor: '#e0e0e0',
-              backgroundColor: '#f7f8fa',
+              backgroundColor: '#357ae8',
             },
           }}
-          startIcon={<GoogleIcon />}
+          startIcon={<GoogleIcon sx={{ mr: 1 }} />}
         >
-          continuar com google
+          Continuar com google
         </Button>
 
-        {/* Botão de continuar com Facebook */}
         <Button
           fullWidth
-          variant="outlined"
+          variant="contained"
           sx={{
-            borderColor: '#e0e0e0',
-            color: '#333',
+            marginBottom: 2,
+            backgroundColor: '#1877F2', // azul
+            color: '#fff',
             padding: '10px',
             fontSize: '14px',
             textTransform: 'none',
             fontFamily: 'Poppins, sans-serif',
             borderRadius: '8px',
             '&:hover': {
-              borderColor: '#e0e0e0',
-              backgroundColor: '#f7f8fa',
+              backgroundColor: '#166fe5',
             },
           }}
-          startIcon={<FacebookIcon />}
+          startIcon={<FacebookIcon sx={{ mr: 1 }} />}
         >
-          continuar com facebook
+          Continuar com facebook
         </Button>
+
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: '100%',
+            marginTop: '10px',
+            alignItems: 'center',
+          }}
+        >
+          <Link href="#" underline="hover" sx={{ fontFamily: 'Poppins, sans-serif', fontSize: '14px', color: '#2f3349', mb: 1, border: '1px solid #ccc', padding: '10px', width: '100%', textAlign: 'center', borderRadius: '5px' }}>
+            Esqueceu a senha?
+          </Link>
+          <Link href="#" underline="hover" sx={{ fontFamily: 'Poppins, sans-serif', fontSize: '14px', color: '#2f3349', border: '1px solid #ccc', padding: '10px', width: '100%', textAlign: 'center', borderRadius: '5px' }}>
+            Criar conta
+          </Link>
+        </Box>
       </Box>
     </Box>
   );
 }
-
