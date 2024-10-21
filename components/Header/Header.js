@@ -1,5 +1,5 @@
 'use client';
- 
+
 import React from 'react';
 import {
   AppBar,
@@ -16,21 +16,30 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
- 
+import { useSession, signIn, signOut } from 'next-auth/react';
+import { useRouter } from 'next/router';
+
+// Componente Header
 const Header = () => {
   const [anchorElMarket, setAnchorElMarket] = React.useState(null);
   const [anchorElPages, setAnchorElPages] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElVendor, setAnchorElVendor] = React.useState(null);
- 
+
+  const { data: session } = useSession();
+  const router = useRouter();
+
   const handleMenuOpen = (event, menuSetter) => {
     menuSetter(event.currentTarget);
   };
- 
+
   const handleMenuClose = (menuSetter) => {
     menuSetter(null);
   };
- 
+
+  const handleSignOut = () => signOut();
+  const handleSignIn = () => signIn();
+
   return (
     <AppBar position="static" sx={{ backgroundColor: '#f8f9fa', color: 'black', padding: '10px 0' }}>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -41,7 +50,7 @@ const Header = () => {
             Baazar
           </Typography>
         </Box>
- 
+
         {/* Barra de Pesquisa */}
         <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', marginX: 2 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', backgroundColor: '#e0e0e0', borderRadius: 1, paddingRight: 2, width: '400px' }}>
@@ -53,7 +62,7 @@ const Header = () => {
             />
           </Box>
         </Box>
- 
+
         {/* Menu de Opções */}
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           {/* Home Menu */}
@@ -73,7 +82,7 @@ const Header = () => {
               <MenuItem key={item}>{item}</MenuItem>
             ))}
           </Menu>
- 
+
           {/* Pages Menu */}
           <Button
             endIcon={<ArrowDropDownIcon />}
@@ -91,7 +100,7 @@ const Header = () => {
               <MenuItem key={item}>{item}</MenuItem>
             ))}
           </Menu>
- 
+
           {/* User Account Menu */}
           <Button
             endIcon={<ArrowDropDownIcon />}
@@ -109,7 +118,7 @@ const Header = () => {
               <MenuItem key={item}>{item}</MenuItem>
             ))}
           </Menu>
- 
+
           {/* Vendor Account Menu */}
           <Button
             endIcon={<ArrowDropDownIcon />}
@@ -128,18 +137,24 @@ const Header = () => {
             ))}
           </Menu>
         </Box>
- 
+
         {/* Ícones do Usuário e Carrinho */}
-        <IconButton sx={{ marginLeft: 2 }} href="/login">
-          <AccountCircle sx={{ color: 'black' }} />
-        </IconButton>
-        <IconButton href="/cart">
+        <IconButton sx={{ marginLeft: 2 }} onClick={() => router.push('/cart')}>
           <ShoppingCartIcon sx={{ color: 'black' }} />
         </IconButton>
+        {/* Se o usuário estiver autenticado, mostra o botão de logout, senão, o de login */}
+        {session ? (
+          <Button onClick={handleSignOut} sx={{ color: 'black' }}>
+            Logout
+          </Button>
+        ) : (
+          <Button onClick={handleSignIn} sx={{ color: 'black' }}>
+            Login
+          </Button>
+        )}
       </Toolbar>
     </AppBar>
   );
 };
- 
+
 export default Header;
- 
