@@ -1,0 +1,38 @@
+/* home.module.css */
+
+
+.title {
+    text-align: center;
+    margin: 40px 0;
+    background-color: rgb(116, 195, 209);
+    color: rgb(0, 0, 0);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.product {
+    margin-top: 5px;
+    background-color: white;
+}
+
+
+/* MeuComponente.module.css */
+
+.imagem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* ajuste conforme necessário */
+    height: auto; /* ajuste conforme necessário */
+    
+  }
+  
+  .imagem {
+    max-width: 100%; /* para que a imagem não ultrapasse o container */
+    height: auto; /* para manter a proporção da imagem */
+  }
+  .home {
+    background-color: #ffffff;
+    min-height: 100vh;
+    
+  }
+  
